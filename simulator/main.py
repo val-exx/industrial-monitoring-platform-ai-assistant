@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 import json
 import random
+import time
 
 
 def generate_telemetry():
@@ -14,5 +15,11 @@ def generate_telemetry():
     }
 
 
-telemetry = generate_telemetry()
-print(json.dumps(telemetry, indent=2))
+def main():
+    while True:
+        telemetry = generate_telemetry()
+        print(json.dumps(telemetry, indent=2))
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()
