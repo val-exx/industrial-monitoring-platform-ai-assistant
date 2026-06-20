@@ -16,10 +16,13 @@ def generate_telemetry():
 
 
 def main():
-    while True:
-        telemetry = generate_telemetry()
-        print(json.dumps(telemetry, indent=2))
-        time.sleep(1)
+    try:
+        while True:
+            telemetry = generate_telemetry()
+            print(json.dumps(telemetry, indent=2))
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Simulator stopped.")
 
 if __name__ == "__main__":
     main()
