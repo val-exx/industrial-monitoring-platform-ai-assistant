@@ -12,13 +12,20 @@ def generate_telemetry(state):
     state["temperature_c"] = round(clamp(state["temperature_c"] + random.uniform(-0.3, 0.3), 65.0, 75.0), 2)
     state["vibration_mm_s"] = round(clamp(state["vibration_mm_s"] + random.uniform(-0.02, 0.02), 0.08, 0.20), 2)
     state["rpm"] = clamp(state["rpm"] + random.randint(-5, 5), 1430, 1470)
+    temp = state["temperature_c"]
+    vibr = state["vibration_mm_s"]
+    if temp > 74.0 or vibr > 0.18:
+        status = "warning"
+    else:
+        status = "running"
+
     return {
         "machine_id": "motor-01",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "temperature_c": state["temperature_c"],
         "vibration_mm_s": state["vibration_mm_s"],
         "rpm": state["rpm"],
-        "status": "running",
+        "status": status,
     }
 
 
