@@ -4,7 +4,8 @@
 
 This folder contains the Python machine simulator.
 
-The simulator currently generates industrial telemetry data for an electric motor and prints it as JSON. In a later milestone, it will publish telemetry to MQTT topics.
+The simulator generates industrial telemetry data for an electric motor, publishes it to an MQTT broker, and prints it as JSON.
+It uses one persistent MQTT connection and publishes each reading with QoS 1.
 
 ## Telemetry Payload
 
@@ -26,11 +27,31 @@ Example payload:
 - `running`: normal operating condition
 - `warning`: `temperature_c > 74.0` or `vibration_mm_s > 0.18`
 
+## MQTT Configuration
+
+The simulator connects to:
+
+- broker: `localhost:1883`
+- topic: `factory/line-1/motor-01/telemetry`
+- QoS: `1`
+
 ## Run Locally
+
+Create and activate a virtual environment, then install the dependencies:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r simulator/requirements.txt
+```
+
+Make sure the Mosquitto broker is running, then start the simulator:
 
 ```powershell
 python simulator/main.py
 ```
+
+Each generated reading is published to MQTT and printed to the terminal.
 
 ## Stop the Simulator
 
