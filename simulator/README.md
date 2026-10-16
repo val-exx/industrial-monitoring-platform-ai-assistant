@@ -33,7 +33,18 @@ The simulator connects to:
 
 - broker: `localhost:1883`
 - topic: `factory/line-1/motor-01/telemetry`
+- availability topic: `factory/line-1/motor-01/availability`
 - QoS: `1`
+
+The availability topic uses retained messages:
+
+- `online` is published after a successful connection
+- `offline` is published during a graceful shutdown
+- `offline` is also configured as the Last Will for an unexpected disconnect
+
+A new subscriber receives the current availability state immediately. The
+telemetry topic is not retained because PostgreSQL will provide historical data
+in a later milestone.
 
 ## Run Locally
 

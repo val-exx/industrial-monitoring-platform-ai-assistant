@@ -30,6 +30,7 @@ MQTT_BROKER_HOST = "localhost"
 MQTT_BROKER_PORT = 1883
 MQTT_CLIENT_ID = f"{MACHINE_ID}-simulator"
 MQTT_TOPIC = f"factory/line-1/{MACHINE_ID}/telemetry"
+MQTT_AVAILABILITY_TOPIC = f"factory/line-1/{MACHINE_ID}/availability"
 MQTT_QOS = 1
 
 
@@ -87,6 +88,7 @@ def main():
         host=MQTT_BROKER_HOST,
         port=MQTT_BROKER_PORT,
         topic=MQTT_TOPIC,
+        availability_topic=MQTT_AVAILABILITY_TOPIC,
         client_id=MQTT_CLIENT_ID,
         qos=MQTT_QOS,
     )
